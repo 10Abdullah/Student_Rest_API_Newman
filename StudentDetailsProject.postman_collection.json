@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "490b426b-6253-424e-b956-a17cbdc9d68b",
+		"name": "StudentDetailsProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26179406"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Booking Status checked successfully\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"Booking_ID\",jsonData.id)\r",
+							"\r",
+							"pm.environment.set(\"First_Name\",jsonData.first_name)\r",
+							"\r",
+							"pm.environment.set(\"Middle_Name\",jsonData.middle_name)\r",
+							"\r",
+							"pm.environment.set(\"last_Name\",jsonData.last_name)\r",
+							"\r",
+							"pm.environment.set(\"Date_Of_Birth\",jsonData.date_of_birth)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\"first_name\": \"sample string 2\",\r\n\"middle_name\": \"sample string 3\",\r\n\"last_name\": \"sample string 4\",\r\n\"date_of_birth\": \"sample string 5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code validation\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData=pm.response.json()\r",
+							"console.log(jsonData.length)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SpecificStudent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"ID Validation\", function () {\r",
+							"pm.expect(jsonData.data.id).to.eql(pm.environment.get(\"Booking_ID\"));\r",
+							"})\r",
+							"pm.test(\"First Name Validation\", function () {\r",
+							"pm.expect(jsonData.data.first_name).to.eql(pm.environment.get(\"First_Name\"));\r",
+							"})\r",
+							"pm.test(\"Middle Name Validation\", function () {\r",
+							"pm.expect(jsonData.data.middle_name).to.eql(pm.environment.get(\"Middle_Name\"));\r",
+							"})\r",
+							"pm.test(\"Last Name Validation\", function () {\r",
+							"pm.expect(jsonData.data.last_name).to.eql(pm.environment.get(\"last_Name\"));\r",
+							"})\r",
+							"pm.test(\"Date of birth Validation\", function () {\r",
+							"pm.expect(jsonData.data.date_of_birth).to.eql(pm.environment.get(\"Date_Of_Birth\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/studentsDetails/{{Booking_ID}}",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{Booking_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TechnicalSkills",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create Successfully\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"id\": 1,\r\n\"language\": [\r\n\"sample string 1\",\r\n\"sample string 2\"\r\n],\r\n\"yearexp\": \"sample string 2\",\r\n\"lastused\": \"sample string 3\",\r\n\"st_id\": \"{{Booking_ID}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/technicalskills",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"technicalskills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StudentAddress",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Student address Succesfully created\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"Status\",jsonData.status)\r",
+							"pm.environment.set(\"Massage\",jsonData.msg)\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status Validation\", function () {\r",
+							"pm.expect(jsonData.status).to.eql(pm.environment.get(\"Status\"));\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Massage Validation\", function () {\r",
+							"pm.expect(jsonData.msg).to.eql(pm.environment.get(\"Massage\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Permanent_Address\": { \"House_Number\":\r\n\"sample string 1\",\"City\": \"sample string 2\",\r\n\"State\": \"sample string 3\", \"Country\":\r\n\"sample string 4\",\"PhoneNumber\": [\r\n{\r\n\"Std_Code\": \"sample string 1\",\"Home\":\r\n\"sample string 2\", \"Mobile\": \"sample\r\nstring 3\"\r\n},\r\n{\r\n\"Std_Code\": \"sample string 1\",\"Home\":\r\n\"sample string 2\", \"Mobile\": \"sample\r\nstring 3\"\r\n}\r\n]\r\n},\r\n\"stId\":\"{{Booking_ID}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/addresses",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StudentDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code Validation Successfully\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"pm.environment.set(\"Language\",jsonData.data.TechnicalDetails[0].language)\r",
+							"pm.environment.set(\"Year_of_Experience\",jsonData.data.TechnicalDetails[0].yearexp)\r",
+							"pm.environment.set(\"House_Number\",jsonData.data.Address[0].Permanent_Address.House_Number)\r",
+							"pm.environment.set(\"City\",jsonData.data.Address[0].Permanent_Address.City)\r",
+							"pm.environment.set(\"Country\",jsonData.data.Address[0].Permanent_Address.Country)\r",
+							"pm.environment.set(\"Mobile\",jsonData.data.Address[0].Permanent_Address.PhoneNumber[0].Mobile)\r",
+							"pm.environment.set(\"current_address\",jsonData.data.Address.Current_Address)\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Language Validation\", function () {\r",
+							"pm.expect(jsonData.data.TechnicalDetails[0].language).to.eql(pm.environment.get(\"Language\"));\r",
+							"})\r",
+							"pm.test(\"Year of Experience\", function () {\r",
+							"pm.expect(jsonData.data.TechnicalDetails[0].yearexp).to.eql(pm.environment.get(\"Year_of_Experience\"));\r",
+							"})\r",
+							"pm.test(\"House Number\", function () {\r",
+							"pm.expect(jsonData.data.Address[0].Permanent_Address.House_Number).to.eql(pm.environment.get(\"House_Number\"));\r",
+							"})\r",
+							"pm.test(\"City Validation\", function () {\r",
+							"pm.expect(jsonData.data.Address[0].Permanent_Address.City).to.eql(pm.environment.get(\"City\"));\r",
+							"})\r",
+							"pm.test(\"Country Validation\", function () {\r",
+							"pm.expect(jsonData.data.Address[0].Permanent_Address.Country).to.eql(pm.environment.get(\"Country\"));\r",
+							"})\r",
+							"pm.test(\"Mobile Validation\", function () {\r",
+							"pm.expect(jsonData.data.Address[0].Permanent_Address.PhoneNumber[0].Mobile).to.eql(pm.environment.get(\"Mobile\"));\r",
+							"})\r",
+							"pm.test(\"Current Address Validation\", function () {\r",
+							"pm.expect(jsonData.data.Address.Current_Address).to.eql(pm.environment.get(\"current_address\"));\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thetestingworldapi.com/api/FinalStudentDetails/{{Booking_ID}}",
+					"protocol": "https",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"FinalStudentDetails",
+						"{{Booking_ID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
